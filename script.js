@@ -53,7 +53,19 @@ const addRandomStep = () => {
   sequence.push(colorButtons[index]);
 };
 
+// Tempo entre um botão e o próximo da sequência, em milissegundos
+const stepDelay = 700;
+
+// Toca a sequência inteira, um botão de cada vez
+const showSequence = () => {
+  sequence.forEach((button, index) => {
+    setTimeout(() => {
+      playButton(button);
+    }, (index + 1) * stepDelay);
+  });
+};
+
 startButton.addEventListener('click', () => {
   addRandomStep();
-  console.log(sequence);
+  showSequence();
 });
