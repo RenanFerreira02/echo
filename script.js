@@ -3,12 +3,17 @@ const startButton = document.querySelector('.start-button');
 const statusBox = document.querySelector('.status');
 const statusTitle = document.querySelector('.status-title');
 const statusText = document.querySelector('.status-text');
+const roundValue = document.querySelector('.round-value');
+const bestValue = document.querySelector('.best-value');
 
 // A sequência do jogo: uma lista de botões, na ordem em que acendem
 let sequence = [];
 
 // A posição da sequência que o jogador precisa acertar agora
 let step = 0;
+
+// O maior número de rodadas completas desde que a página abriu
+let best = 0;
 
 // O contexto de áudio só é criado no primeiro toque (regra dos navegadores)
 let audioContext = null;
@@ -91,6 +96,7 @@ const showSequence = () => {
 const nextRound = () => {
   step = 0;
   addRandomStep();
+  roundValue.textContent = sequence.length;
   showSequence();
 };
 
@@ -113,6 +119,8 @@ const checkAnswer = (button) => {
   step = step + 1;
 
   if (step === sequence.length) {
+    best = Math.max(best, sequence.length);
+    bestValue.textContent = best;
     showStatus('Acertou', 'Muito bem! Lá vem a próxima rodada.');
     setColorButtonsDisabled(true);
     setTimeout(nextRound, 900);
