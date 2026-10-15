@@ -113,6 +113,11 @@ button:focus-visible {
   transition: transform 80ms, background 80ms;
 }
 
+/* Travado: o cursor avisa que não adianta clicar */
+.color-button:disabled {
+  cursor: default;
+}
+
 /* Botão aceso: muda a cor, a claridade e o tamanho */
 .color-button.is-lit {
   background: var(--color-lit);
@@ -217,6 +222,14 @@ button:focus-visible {
   box-shadow: 0 5px 0 #0c0d10;
   font-size: 20px;
   font-weight: 800;
+}
+
+.start-button:disabled {
+  background: #22252b;
+  color: #8a909a;
+  border-color: #3a3f47;
+  box-shadow: none;
+  cursor: default;
 }
 
 .status {

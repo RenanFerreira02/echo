@@ -58,12 +58,20 @@ const showStatus = (title, text) => {
   statusText.textContent = text;
 };
 
+// Liga ou desliga todos os botões coloridos de uma vez
+const setColorButtonsDisabled = (disabled) => {
+  colorButtons.forEach((button) => {
+    button.disabled = disabled;
+  });
+};
+
 // Tempo entre um botão e o próximo da sequência, em milissegundos
 const stepDelay = 700;
 
 // Toca a sequência inteira, um botão de cada vez
 const showSequence = () => {
   showStatus('Observe', 'Observe a sequência…');
+  setColorButtonsDisabled(true);
 
   sequence.forEach((button, index) => {
     setTimeout(() => {
@@ -74,6 +82,7 @@ const showSequence = () => {
   // Depois do último botão, a vez passa para o jogador
   setTimeout(() => {
     showStatus('Sua vez', `Repita: passo 1 de ${sequence.length}`);
+    setColorButtonsDisabled(false);
   }, (sequence.length + 1) * stepDelay);
 };
 
@@ -95,6 +104,7 @@ const checkAnswer = (button) => {
 
   if (step === sequence.length) {
     showStatus('Acertou', 'Muito bem! Lá vem a próxima rodada.');
+    setColorButtonsDisabled(true);
     setTimeout(nextRound, 900);
     return;
   }
@@ -110,6 +120,10 @@ colorButtons.forEach((button) => {
 });
 
 startButton.addEventListener('click', () => {
+  startButton.disabled = true;
   sequence = [];
   nextRound();
 });
+
+// Antes de Começar, os botões coloridos ficam travados
+setColorButtonsDisabled(true);
