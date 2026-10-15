@@ -1,4 +1,8 @@
 const colorButtons = document.querySelectorAll('.color-button');
+const startButton = document.querySelector('.start-button');
+
+// A sequência do jogo: uma lista de botões, na ordem em que acendem
+let sequence = [];
 
 // O contexto de áudio só é criado no primeiro toque (regra dos navegadores)
 let audioContext = null;
@@ -41,4 +45,15 @@ colorButtons.forEach((button) => {
   button.addEventListener('click', () => {
     playButton(button);
   });
+});
+
+// Sorteia um botão e coloca no fim da sequência
+const addRandomStep = () => {
+  const index = Math.floor(Math.random() * colorButtons.length);
+  sequence.push(colorButtons[index]);
+};
+
+startButton.addEventListener('click', () => {
+  addRandomStep();
+  console.log(sequence);
 });
