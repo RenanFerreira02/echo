@@ -103,29 +103,52 @@ button:focus-visible {
   gap: 20px;
 }
 
-/* Botões coloridos: cada cor define o seu tom */
+/* Botões coloridos: cada cor define o tom apagado e o tom aceso */
 .color-button {
   aspect-ratio: 1 / 1;
   border: 3px solid #0c0d10;
   border-radius: 24px;
   background: var(--color-idle);
   box-shadow: 0 6px 0 #0c0d10;
+  transition: transform 80ms, background 80ms;
+}
+
+/* Botão aceso: muda a cor, a claridade e o tamanho */
+.color-button.is-lit {
+  background: var(--color-lit);
+  border-color: #ffffff;
+  transform: scale(0.96);
+}
+
+/* Quem pede menos movimento vê só a troca de cor */
+@media (prefers-reduced-motion: reduce) {
+  .color-button {
+    transition: none;
+  }
+
+  .color-button.is-lit {
+    transform: none;
+  }
 }
 
 .green {
   --color-idle: #1d5c34;
+  --color-lit: #5ef08c;
 }
 
 .red {
   --color-idle: #6e1f22;
+  --color-lit: #ff6b6b;
 }
 
 .yellow {
   --color-idle: #6b5a12;
+  --color-lit: #ffe14d;
 }
 
 .blue {
   --color-idle: #1d3a73;
+  --color-lit: #6ea8ff;
 }
 
 /* Coluna lateral */
