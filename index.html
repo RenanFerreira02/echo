@@ -4,8 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Echo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Echo</h1>
+  <div class="page">
+    <header class="header">
+      <div class="intro">
+        <h1 class="title">Echo</h1>
+        <p class="subtitle">Observe a sequência e repita. A cada rodada ela cresce um passo.</p>
+      </div>
+      <p class="keys-hint">Teclas: 1 a 4</p>
+    </header>
+
+    <div class="layout">
+      <main class="board-panel">
+        <div class="board">
+          <button type="button" class="color-button green" aria-label="Botão verde (tecla 1)"></button>
+          <button type="button" class="color-button red" aria-label="Botão vermelho (tecla 2)"></button>
+          <button type="button" class="color-button yellow" aria-label="Botão amarelo (tecla 3)"></button>
+          <button type="button" class="color-button blue" aria-label="Botão azul (tecla 4)"></button>
+        </div>
+      </main>
+
+      <aside class="sidebar">
+        <section class="level">
+          <h2 class="section-title">Nível</h2>
+          <div class="level-options">
+            <button type="button" class="level-button" aria-pressed="true">
+              <span class="level-name">Fácil</span>
+              <span class="level-detail">4 botões</span>
+            </button>
+            <button type="button" class="level-button" aria-pressed="false">
+              <span class="level-name">Difícil</span>
+              <span class="level-detail">6 botões</span>
+            </button>
+          </div>
+        </section>
+
+        <button type="button" class="start-button">Começar</button>
+
+        <section class="status">
+          <p class="status-title">Pronto</p>
+          <p class="status-text">Escolha o nível e aperte Começar.</p>
+        </section>
+
+        <section class="score">
+          <div class="score-item">
+            <span class="score-label">Rodada</span>
+            <span class="score-value round-value">0</span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">Recorde</span>
+            <span class="score-value best-value">0</span>
+          </div>
+        </section>
+
+        <p class="rules">Errou, o jogo termina e recomeça da rodada 1. O recorde vale enquanto a página estiver aberta.</p>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <p>Teclas na ordem de leitura: da esquerda para a direita, de cima para baixo.</p>
+      <p>Sons gerados no código com a Web Audio API.</p>
+    </footer>
+  </div>
 </body>
 </html>
