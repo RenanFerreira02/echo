@@ -137,6 +137,20 @@ colorButtons.forEach((button) => {
   });
 });
 
+// Teclas 1 a 4: cada número aperta o botão daquela posição
+document.addEventListener('keydown', (event) => {
+  // Segurar a tecla repete o evento; só o primeiro aperto conta
+  if (event.repeat) {
+    return;
+  }
+
+  colorButtons.forEach((button, index) => {
+    if (event.key === String(index + 1)) {
+      button.click();
+    }
+  });
+});
+
 startButton.addEventListener('click', () => {
   startButton.disabled = true;
   statusBox.classList.remove('is-over');
