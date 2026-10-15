@@ -1,5 +1,7 @@
 const colorButtons = document.querySelectorAll('.color-button');
 const startButton = document.querySelector('.start-button');
+const statusTitle = document.querySelector('.status-title');
+const statusText = document.querySelector('.status-text');
 
 // A sequência do jogo: uma lista de botões, na ordem em que acendem
 let sequence = [];
@@ -53,16 +55,29 @@ const addRandomStep = () => {
   sequence.push(colorButtons[index]);
 };
 
+// Troca o título e o texto da caixa de mensagens
+const showStatus = (title, text) => {
+  statusTitle.textContent = title;
+  statusText.textContent = text;
+};
+
 // Tempo entre um botão e o próximo da sequência, em milissegundos
 const stepDelay = 700;
 
 // Toca a sequência inteira, um botão de cada vez
 const showSequence = () => {
+  showStatus('Observe', 'Observe a sequência…');
+
   sequence.forEach((button, index) => {
     setTimeout(() => {
       playButton(button);
     }, (index + 1) * stepDelay);
   });
+
+  // Depois do último botão, a vez passa para o jogador
+  setTimeout(() => {
+    showStatus('Sua vez', 'Repita a sequência.');
+  }, (sequence.length + 1) * stepDelay);
 };
 
 startButton.addEventListener('click', () => {
