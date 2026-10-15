@@ -6,6 +6,9 @@ const statusText = document.querySelector('.status-text');
 // A sequência do jogo: uma lista de botões, na ordem em que acendem
 let sequence = [];
 
+// A posição da sequência que o jogador precisa acertar agora
+let step = 0;
+
 // O contexto de áudio só é criado no primeiro toque (regra dos navegadores)
 let audioContext = null;
 
@@ -43,12 +46,6 @@ const playButton = (button) => {
   }, 300);
 };
 
-colorButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    playButton(button);
-  });
-});
-
 // Sorteia um botão e coloca no fim da sequência
 const addRandomStep = () => {
   const index = Math.floor(Math.random() * colorButtons.length);
@@ -76,11 +73,43 @@ const showSequence = () => {
 
   // Depois do último botão, a vez passa para o jogador
   setTimeout(() => {
-    showStatus('Sua vez', 'Repita a sequência.');
+    showStatus('Sua vez', `Repita: passo 1 de ${sequence.length}`);
   }, (sequence.length + 1) * stepDelay);
 };
 
-startButton.addEventListener('click', () => {
+// Começa uma rodada: o jogador volta ao primeiro passo e a sequência cresce
+const nextRound = () => {
+  step = 0;
   addRandomStep();
   showSequence();
+};
+
+// Confere se o botão clicado é o esperado neste passo
+const checkAnswer = (button) => {
+  if (button !== sequence[step]) {
+    showStatus('Errou', 'Esse não era o botão.');
+    return;
+  }
+
+  step = step + 1;
+
+  if (step === sequence.length) {
+    showStatus('Acertou', 'Muito bem! Lá vem a próxima rodada.');
+    setTimeout(nextRound, 900);
+    return;
+  }
+
+  showStatus('Sua vez', `Repita: passo ${step + 1} de ${sequence.length}`);
+};
+
+colorButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    playButton(button);
+    checkAnswer(button);
+  });
+});
+
+startButton.addEventListener('click', () => {
+  sequence = [];
+  nextRound();
 });
