@@ -1,5 +1,6 @@
 const colorButtons = document.querySelectorAll('.color-button');
 const startButton = document.querySelector('.start-button');
+const statusBox = document.querySelector('.status');
 const statusTitle = document.querySelector('.status-title');
 const statusText = document.querySelector('.status-text');
 
@@ -93,10 +94,19 @@ const nextRound = () => {
   showSequence();
 };
 
+// Errou: a partida acaba e Começar vira "Jogar de novo"
+const endGame = () => {
+  showStatus('Fim de jogo', `Errou! Rodadas completas: ${sequence.length - 1}.`);
+  statusBox.classList.add('is-over');
+  setColorButtonsDisabled(true);
+  startButton.textContent = 'Jogar de novo';
+  startButton.disabled = false;
+};
+
 // Confere se o botão clicado é o esperado neste passo
 const checkAnswer = (button) => {
   if (button !== sequence[step]) {
-    showStatus('Errou', 'Esse não era o botão.');
+    endGame();
     return;
   }
 
@@ -121,6 +131,7 @@ colorButtons.forEach((button) => {
 
 startButton.addEventListener('click', () => {
   startButton.disabled = true;
+  statusBox.classList.remove('is-over');
   sequence = [];
   nextRound();
 });
