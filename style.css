@@ -103,6 +103,12 @@ button:focus-visible {
   gap: 20px;
 }
 
+/* Nível Difícil: seis botões em três colunas */
+.board.is-hard {
+  max-width: 560px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 /* Botões coloridos: cada cor define o tom apagado e o tom aceso */
 .color-button {
   aspect-ratio: 1 / 1;
@@ -156,6 +162,16 @@ button:focus-visible {
   --color-lit: #6ea8ff;
 }
 
+.purple {
+  --color-idle: #4a2470;
+  --color-lit: #c58bff;
+}
+
+.orange {
+  --color-idle: #7a3d10;
+  --color-lit: #ffa24d;
+}
+
 /* Coluna lateral */
 .sidebar {
   width: 340px;
@@ -196,6 +212,10 @@ button:focus-visible {
   border: 2px solid #3a3f47;
   border-radius: 16px;
   text-align: left;
+}
+
+.level-button:disabled {
+  cursor: default;
 }
 
 .level-button[aria-pressed="true"] {
